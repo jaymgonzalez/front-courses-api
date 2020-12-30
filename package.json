@@ -1,0 +1,10 @@
+{
+  "name": "front-courses-api",
+  "version": "1.0.0",
+  "description": "front end for the course express api",
+  "main": "index.js",
+  "repository": "https://github.com/liteljaime/front-courses-api",
+  "author": "Jay M Gonzalez",
+  "license": "MIT",
+  "private": false
+}
