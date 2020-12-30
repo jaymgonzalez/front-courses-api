@@ -6,7 +6,6 @@ export const useCoursesData = () => {
 
   const [coursesData, setCoursesData] = useState()
 
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(url)
@@ -16,12 +15,6 @@ export const useCoursesData = () => {
     fetchData()
   }, [])
 
-
-
   return coursesData
 
 }
-
-
-
-

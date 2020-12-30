@@ -1,12 +1,9 @@
 import React from 'react'
-import { useCoursesData } from '../hooks/useCoursesData'
+import { Link } from 'react-router-dom'
 
 
-const CourseRow = () => {
+const CourseRow = ({ title, category, slug, author }) => {
 
-  const coursesData = useCoursesData()
-
-  console.log(coursesData)
 
   return (
     <tr>
@@ -17,17 +14,18 @@ const CourseRow = () => {
           </div>
           <div className="ml-4">
             <div className="text-sm font-medium text-gray-900">
-              Jane Cooper
-                    </div>
+              {author}
+            </div>
             <div className="text-sm text-gray-500">
-              jane.cooper@example.com
-                    </div>
+              El email de julian
+            </div>
           </div>
         </div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">Regional Paradigm Technician</div>
-        <div className="text-sm text-gray-500">Optimization</div>
+      <td className="px-6 py-4">
+        <Link to={`/course/${slug}`}>
+          <div className="text-sm text-gray-900">{title}</div>
+        </Link>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
