@@ -15,7 +15,9 @@ const CourseComponent = () => {
     authorsData && authorsData.map(author => {
       if (author.id === curr.authorId) {
         curr.authorName = author.name
+        curr.platform = author.platform
       }
+      return curr
     })
     return arr
   }, 0)
@@ -49,6 +51,9 @@ const CourseComponent = () => {
                       slug={course.slug}
                       category={course.category}
                       author={course.authorName}
+                      platform={course.platform}
+                      finished={course.finished}
+
                     />
                   )}
                 </tbody>
