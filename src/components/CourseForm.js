@@ -75,6 +75,8 @@ function CourseForm() {
     return Object.keys(_errors).length === 0
   }
 
+  if (error) throw error
+
   if (loading) return <Spinner />
 
   return (
@@ -97,7 +99,7 @@ function CourseForm() {
         className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white ${errors.authorId ? "border-red-500" : "border-gray-200"} focus:border-lightblue-800`}
       >
         <option value="" />
-        {courses.map((author, i) => <option key={i} value={author.authorId}>{author.name}</option>)}
+        {courses.map((author, i) => <option key={i} value={author.authorId}>{author.authorName}</option>)}
       </select>
       {errors.authorId && (
         <div className="pt-2 text-red-500 text-xs italic">{errors.authorId}</div>

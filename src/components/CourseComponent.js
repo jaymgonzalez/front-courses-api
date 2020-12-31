@@ -10,6 +10,8 @@ const CourseComponent = () => {
 
   const { courseAuthorData, loading, error } = useCourseAuthorData()
 
+  if (error) throw error
+
   if (loading) return <Spinner />
 
   return (

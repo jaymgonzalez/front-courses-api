@@ -9,6 +9,8 @@ const CoursePage = () => {
   const { slug } = useParams()
   const { courseAuthorData: course, loading, error } = useCourseAuthorData()
 
+  if (error) throw error
+
   if (loading) return <Spinner />
 
   let _course = course.filter(course => course.slug === slug)
