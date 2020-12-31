@@ -1,26 +1,16 @@
 import React from 'react'
 import CourseRow from './CourseRow'
-import { useCoursesData } from '../hooks/useCoursesData'
-import { useAuthorsData } from '../hooks/useAuthorsData'
+import Spinner from './common/Spinner'
+import { useCourseAuthorData } from '../hooks/useCourseAuthorData'
 
 
 
 
 const CourseComponent = () => {
 
-  const coursesData = useCoursesData()
-  const authorsData = useAuthorsData()
+  const { courseAuthorData, loading, error } = useCourseAuthorData()
 
-  const authorAndCourseData = coursesData && coursesData.reduce((acc, curr, i, arr) => {
-    authorsData && authorsData.map(author => {
-      if (author.id === curr.authorId) {
-        curr.authorName = author.name
-        curr.platform = author.platform
-      }
-      return curr
-    })
-    return arr
-  }, 0)
+  if (loading) return <Spinner />
 
   return (
     <div>
@@ -44,7 +34,7 @@ const CourseComponent = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
 
-                  {authorAndCourseData && authorAndCourseData.map(course =>
+                  {courseAuthorData.map(course =>
                     <CourseRow
                       key={course.id}
                       title={course.title}
@@ -53,7 +43,6 @@ const CourseComponent = () => {
                       author={course.authorName}
                       platform={course.platform}
                       finished={course.finished}
-
                     />
                   )}
                 </tbody>

@@ -1,15 +1,16 @@
 import React, { useState } from "react"
 import TextInput from "./common/TextInput"
-import { useAuthorsData } from '../hooks/useAuthorsData'
-import { useCoursesData } from "../hooks/useCoursesData"
+import { useCourseAuthorData } from "../hooks/useCourseAuthorData"
+import Spinner from './common/Spinner'
+
 
 
 
 
 function CourseForm() {
 
-  const authorsData = useAuthorsData()
-  const coursesData = useCoursesData()
+  const { courseAuthorData: courses, loading, error } = useCourseAuthorData()
+
   const [errors, setErrors] = useState({})
   const [course, setCourse] = useState({
     id: null,
@@ -55,7 +56,7 @@ function CourseForm() {
   const onChange = ({ target }) => {
     setCourse({
       ...course,
-      id: coursesData.length + 1,
+      id: courses.length + 1,
       slug: createSlug(course.title),
       [target.name]: target.value
     })
@@ -73,6 +74,8 @@ function CourseForm() {
 
     return Object.keys(_errors).length === 0
   }
+
+  if (loading) return <Spinner />
 
   return (
     <form className="w-full max-w-sm mx-auto py-20 px-2" onSubmit={onSubmit}>
@@ -94,7 +97,7 @@ function CourseForm() {
         className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white ${errors.authorId ? "border-red-500" : "border-gray-200"} focus:border-lightblue-800`}
       >
         <option value="" />
-        {authorsData && authorsData.map((author, i) => <option key={i} value={author.id}>{author.name}</option>)}
+        {courses.map((author, i) => <option key={i} value={author.authorId}>{author.name}</option>)}
       </select>
       {errors.authorId && (
         <div className="pt-2 text-red-500 text-xs italic">{errors.authorId}</div>
