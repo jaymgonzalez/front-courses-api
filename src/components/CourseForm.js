@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import TextInput from "./common/TextInput"
 import { useAuthorsData } from '../hooks/useAuthorsData'
+import { useCoursesData } from "../hooks/useCoursesData"
 
 
 
@@ -8,6 +9,7 @@ import { useAuthorsData } from '../hooks/useAuthorsData'
 function CourseForm() {
 
   const authorsData = useAuthorsData()
+  const coursesData = useCoursesData()
   const [errors, setErrors] = useState({})
   const [course, setCourse] = useState({
     id: null,
@@ -42,13 +44,18 @@ function CourseForm() {
     event.preventDefault()
     if (!formIsValid()) return
     postData()
-    console.log('course sent')
+      .then(() => {
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log({ err });
+      })
   }
 
   const onChange = ({ target }) => {
     setCourse({
       ...course,
-      id: authorsData.length - 1,
+      id: coursesData.length + 1,
       slug: createSlug(course.title),
       [target.name]: target.value
     })
@@ -67,10 +74,8 @@ function CourseForm() {
     return Object.keys(_errors).length === 0
   }
 
-  console.log(JSON.stringify(course))
-
   return (
-    <form onSubmit={onSubmit}>
+    <form className="w-full max-w-sm mx-auto py-20 px-2" onSubmit={onSubmit}>
       <TextInput
         id="title"
         label="Title"
@@ -79,24 +84,22 @@ function CourseForm() {
         value={course.title}
         error={errors.title}
       />
-      <div className="form-group">
-        <label htmlFor="author">Author</label>
-        <div className="field">
-          <select
-            id="author"
-            name="authorId"
-            onChange={onChange}
-            value={course.authorId || ""}
-            className="form-control"
-          >
-            <option value="" />
-            {authorsData && authorsData.map((author, i) => <option key={i} value={author.id}>{author.name}</option>)}
-          </select>
-        </div>
-        {errors.authorId && (
-          <div className="pt-2 text-red-500 text-xs italic">{errors.authorId}</div>
-        )}
-      </div>
+
+      <label className="block text-gray-800 font-bold mb-1 pr-4 pt-2 capitalize" htmlFor="author">Author</label>
+      <select
+        id="author"
+        name="authorId"
+        onChange={onChange}
+        value={course.authorId || ""}
+        className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white ${errors.authorId ? "border-red-500" : "border-gray-200"} focus:border-lightblue-800`}
+      >
+        <option value="" />
+        {authorsData && authorsData.map((author, i) => <option key={i} value={author.id}>{author.name}</option>)}
+      </select>
+      {errors.authorId && (
+        <div className="pt-2 text-red-500 text-xs italic">{errors.authorId}</div>
+      )}
+
 
       <TextInput
         id="category"
@@ -106,17 +109,18 @@ function CourseForm() {
         value={course.category}
         error={errors.category}
       />
+      <label className="block text-gray-800 font-bold mb-1 pr-4 pt-2 capitalize" htmlFor="description">Description</label>
 
-      <TextInput
+      <textarea
         id="description"
-        label="Description"
         name="description"
         onChange={onChange}
         value={course.description}
         error={errors.description}
+        className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white appearance-none ${errors.description ? "border-red-500" : "border-gray-200"} focus:border-blue-800`}
       />
 
-      <input type="submit" value="Save" className="btn btn-primary" />
+      <button className="mx-auto my-10 shadow-2xl hover:text-gray-50 flex bg-blue-200 hover:bg-blue-800 focus:shadow-outline focus:outline-none text-blue-800 text-xl font-extrabold py-3 px-6 rounded-xl" type="submit">Save Course</button>
     </form>
   )
 }

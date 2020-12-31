@@ -7,17 +7,15 @@ function TextInput(props) {
     wrapperClass += " border-red-500"
   }
   return (
-    <div className={wrapperClass}>
-      <label htmlFor={props.id}>{props.label}</label>
-      <div className="field">
-        <input
-          id={props.id}
-          name={props.name}
-          onChange={props.onChange}
-          value={props.value}
-          className="form-control"
-        />
-      </div>
+    <div>
+      <label className="block text-gray-800 font-bold mb-1 pr-4 pt-2 capitalize" htmlFor={props.id}>{props.label}</label>
+      <input
+        id={props.id}
+        name={props.name}
+        onChange={props.onChange}
+        value={props.value}
+        className={wrapperClass}
+      />
       {props.error && <div className="pt-2 text-red-500 text-xs italic">{props.error}</div>}
     </div>
   )
