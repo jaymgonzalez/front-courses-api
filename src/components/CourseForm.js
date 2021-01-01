@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import TextInput from "./common/TextInput"
 import { useCourseAuthorData } from "../hooks/useCourseAuthorData"
 import Spinner from './common/Spinner'
+import { postData } from '../api/course-api'
 
 
 
@@ -21,16 +22,16 @@ function CourseForm() {
     description: ""
   })
 
-  async function postData(url = 'https://course-api-express.herokuapp.com/api/courses', data = course) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    return response.json()
-  }
+  // async function postData(url = 'https://course-api-express.herokuapp.com/api/courses', data = course) {
+  //   const response = await fetch(url, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   return response.json()
+  // }
 
 
   function createSlug(value) {
@@ -44,7 +45,7 @@ function CourseForm() {
   const onSubmit = (event) => {
     event.preventDefault()
     if (!formIsValid()) return
-    postData()
+    postData('courses', course)
       .then(() => {
         window.location.reload()
       })
