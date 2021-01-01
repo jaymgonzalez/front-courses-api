@@ -1,70 +1,9 @@
-import React, { useState } from "react"
-import TextInput from "./common/TextInput"
-import { useCourseAuthorData } from "../hooks/useCourseAuthorData"
-import Spinner from './common/Spinner'
-import { postCourse } from '../api/course-api'
+import React from "react"
+import TextInput from "./TextInput"
+import Spinner from './Spinner'
 
 
-
-
-
-function CourseForm() {
-
-  const { courseAuthorData: courses, loading, error } = useCourseAuthorData()
-
-  const [errors, setErrors] = useState({})
-  const [course, setCourse] = useState({
-    id: null,
-    slug: "",
-    title: "",
-    authorId: null,
-    category: "",
-    description: "",
-    finished: false
-  })
-
-
-  function createSlug(value) {
-    return value
-      .replace(/[^a-z0-9_]+/gi, "-")
-      .replace(/^-|-$/g, "")
-      .toLowerCase()
-  }
-
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    if (!formIsValid()) return
-    postCourse('courses', course)
-      .then(() => {
-        window.location.reload()
-      })
-      .catch((err) => {
-        console.log({ err });
-      })
-  }
-
-  const onChange = ({ target }) => {
-    setCourse({
-      ...course,
-      id: courses.length + 1,
-      slug: createSlug(course.title),
-      [target.name]: target.value
-    })
-  }
-
-  function formIsValid() {
-    const _errors = {}
-
-    if (!course.title) _errors.title = "Title is required"
-    if (!course.authorId) _errors.authorId = "Author is required"
-    if (!course.category) _errors.category = "Category is required"
-    if (!course.description) _errors.description = "Description is required"
-
-    setErrors(_errors)
-
-    return Object.keys(_errors).length === 0
-  }
+function CourseForm({ onSubmit, onChange, course, courses, errors, loading, error }) {
 
   if (error) throw error
 
