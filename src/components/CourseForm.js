@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import TextInput from "./common/TextInput"
 import { useCourseAuthorData } from "../hooks/useCourseAuthorData"
 import Spinner from './common/Spinner'
-import { postData } from '../api/course-api'
+import { postCourse } from '../api/course-api'
 
 
 
@@ -19,19 +19,9 @@ function CourseForm() {
     title: "",
     authorId: null,
     category: "",
-    description: ""
+    description: "",
+    finished: false
   })
-
-  // async function postData(url = 'https://course-api-express.herokuapp.com/api/courses', data = course) {
-  //   const response = await fetch(url, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(data)
-  //   })
-  //   return response.json()
-  // }
 
 
   function createSlug(value) {
@@ -45,7 +35,7 @@ function CourseForm() {
   const onSubmit = (event) => {
     event.preventDefault()
     if (!formIsValid()) return
-    postData('courses', course)
+    postCourse('courses', course)
       .then(() => {
         window.location.reload()
       })
@@ -124,6 +114,17 @@ function CourseForm() {
         value={course.description}
         error={errors.description}
         className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white appearance-none ${errors.description ? "border-red-500" : "border-gray-200"} focus:border-blue-800`}
+      />
+
+      <label className="block text-gray-800 font-bold mb-1 pr-4 pt-2 capitalize" htmlFor="finished">Finished?</label>
+
+      <input
+        id="finished"
+        name="finished"
+        type="checkbox"
+        onClick={() => course.finished = !course.finished}
+        value={course.finished}
+        className={`bg-gray-50 border-2 w-1/6 rounded py-2 px-4 "border-gray-200`}
       />
 
       <button className="mx-auto my-10 shadow-2xl hover:text-gray-50 flex bg-blue-200 hover:bg-blue-800 focus:shadow-outline focus:outline-none text-blue-800 text-xl font-extrabold py-3 px-6 rounded-xl" type="submit">Save Course</button>
