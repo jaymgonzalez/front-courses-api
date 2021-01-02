@@ -45,7 +45,6 @@ const FormTemplate = () => {
 
   const onSubmitPut = (event) => {
     event.preventDefault()
-    if (!formIsValid()) return
     updateCourse('courses/', course._id, course)
       .then(() => {
         window.location.reload()

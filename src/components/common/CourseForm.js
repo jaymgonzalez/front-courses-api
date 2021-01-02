@@ -29,7 +29,7 @@ function CourseForm({ onSubmit, onChange, course, authors, errors, loading, erro
         className={`bg-gray-50 border-2 w-full rounded py-2 px-4 text-gray-800 leading-tight focus:outline-none focus:bg-white ${errors.authorId ? "border-red-500" : "border-gray-200"} focus:border-lightblue-800`}
       >
         <option value="" />
-        {authors.map((author, i) => <option key={i} value={author.id}>{author.name}</option>)}
+        {authors && authors.map((author, i) => <option key={i} value={author.id}>{author.name}</option>)}
       </select>
       {errors.authorId && (
         <div className="pt-2 text-red-500 text-xs italic">{errors.authorId}</div>
