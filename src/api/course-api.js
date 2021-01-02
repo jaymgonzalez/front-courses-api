@@ -17,14 +17,19 @@ const postCourse = async (url = 'courses', data) => {
 }
 
 const updateCourse = async (url = 'courses/', id, data) => {
-  const response = await fetch(baseUrl + url + id, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  return response.json()
+  try {
+    const response = await fetch(baseUrl + url + id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    console.log(response.json)
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export {

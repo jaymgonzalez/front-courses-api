@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { postCourse, updateCourse } from '../../api/course-api'
 import CourseForm from './CourseForm'
 import { useCourseAuthorData } from '../../hooks/useCourseAuthorData'
@@ -47,7 +47,8 @@ const FormTemplate = ({ slug }) => {
     event.preventDefault()
     updateCourse('courses/', course._id, course)
       .then(() => {
-        window.location.reload()
+
+        window.location.href = '/'
       })
       .catch((err) => {
         console.log({ err });
@@ -77,7 +78,7 @@ const FormTemplate = ({ slug }) => {
 
   if (slug) {
     let _course = getCourseBySlug(slug)
-    _course && _course[0].slug !== course.slug && setCourse(_course[0])
+    _course && _course[0]._id !== course._id && setCourse(_course[0])
     return (
       <div>
         <CourseForm authors={authors} courses={courses} onSubmit={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
