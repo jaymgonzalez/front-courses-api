@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FormTemplate from './common/FormTemplate'
 
 const UpdateCoursePage = (props) => {
 
+  const [slug, setSlug] = useState('')
+
+  slug !== props.match.params.slug && setSlug(props.match.params.slug)
+
   return (
     <>
-      <FormTemplate courses={props.courses} onSubmit={props.onSubmitPut} onChange={props.onChange} course={props.course} errors={props.errors} loading={props.loading} error={props.error} />
+      <FormTemplate slug={slug} />
     </>
   )
 }

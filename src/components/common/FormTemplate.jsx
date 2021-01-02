@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { postCourse, updateCourse } from '../../api/course-api'
 import CourseForm from './CourseForm'
 import { useCourseAuthorData } from '../../hooks/useCourseAuthorData'
 
-const FormTemplate = () => {
+const FormTemplate = ({ slug }) => {
 
   const { courseAuthorData: courses, authors, loading, error } = useCourseAuthorData()
 
@@ -71,12 +71,25 @@ const FormTemplate = () => {
     })
   }
 
-  return (
-    <div>
-      <CourseForm authors={authors} courses={courses} onSubmitPost={onSubmitPost} onSubmitPut={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
+  const getCourseBySlug = (slug) => {
+    return courses?.filter(course => course.slug === slug)
+  }
 
-    </div>
-  )
+  if (slug) {
+    let _course = getCourseBySlug(slug)
+    _course && _course[0].slug !== course.slug && setCourse(_course[0])
+    return (
+      <div>
+        <CourseForm authors={authors} courses={courses} onSubmit={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <CourseForm authors={authors} courses={courses} onSubmit={onSubmitPost} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
+      </div>
+    )
+  }
 }
 
 export default FormTemplate

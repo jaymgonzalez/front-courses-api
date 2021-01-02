@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import CoursePage from './components/CoursePage'
 import CreateCoursePage from './components/CreateCoursePage'
 import HomePage from './components/HomePage'
-import UpdateCoursePage from './components/UpdateCoursePage'
 import NotFoundPage from './components/NotFoundPage'
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/course/:slug" component={CoursePage} />
         <Route path="/create-course" component={CreateCoursePage} />
-        <Route path="/update-course/:slug" component={UpdateCoursePage} />
+        <Route path="/update-course/:slug" component={CreateCoursePage} />
         <Route component={NotFoundPage} />
       </Switch>
 
