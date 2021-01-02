@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useCourseAuthorData } from '../hooks/useCourseAuthorData'
 import Spinner from './common/Spinner'
 
@@ -8,6 +8,8 @@ const CoursePage = () => {
 
   const { slug } = useParams()
   const { courseAuthorData: course, loading, error } = useCourseAuthorData()
+
+  console.log(course)
 
   if (error) throw error
 
@@ -49,6 +51,9 @@ const CoursePage = () => {
             {_course.description}
           </div>
         </div>
+        <Link to={`/update-course/${slug}`}>
+          <button className="p-4 bg-blue-500 rounded-3xl">Update</button>
+        </Link>
       </div>
     </article>
   )

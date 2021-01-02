@@ -16,7 +16,7 @@ export const useCourseAuthorData = () => {
     return arr
   }, 0)
 
-  return { courseAuthorData, loading, error }
+  return { courseAuthorData, authors, courses, loading, error }
 
 }
 

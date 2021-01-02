@@ -5,7 +5,7 @@ import { useCourseAuthorData } from '../../hooks/useCourseAuthorData'
 
 const FormTemplate = () => {
 
-  const { courseAuthorData: courses, loading, error } = useCourseAuthorData()
+  const { courseAuthorData: courses, authors, loading, error } = useCourseAuthorData()
 
   const [errors, setErrors] = useState({})
   const [course, setCourse] = useState({
@@ -74,7 +74,7 @@ const FormTemplate = () => {
 
   return (
     <div>
-      <CourseForm courses={courses} onSubmitPost={onSubmitPost} onSubmitPut={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
+      <CourseForm authors={authors} courses={courses} onSubmitPost={onSubmitPost} onSubmitPut={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
 
     </div>
   )

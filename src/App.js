@@ -13,7 +13,7 @@ function App() {
         <Route path="/" exact component={HomePage} />
         <Route path="/course/:slug" component={CoursePage} />
         <Route path="/create-course" component={CreateCoursePage} />
-        <Route path="/update-course" component={UpdateCoursePage} />
+        <Route path="/update-course/:slug" component={UpdateCoursePage} />
         <Route component={NotFoundPage} />
       </Switch>
 
