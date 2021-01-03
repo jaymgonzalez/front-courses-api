@@ -5,12 +5,9 @@ import Spinner from './Spinner'
 
 function CourseForm({ onSubmit, onChange, course, authors, errors, loading, error }) {
 
-
   if (error) throw error
 
   if (loading) return <Spinner />
-
-  console.log(course.finished)
 
   return (
     <form className="w-full max-w-sm mx-auto py-20 px-2" onSubmit={onSubmit}>
@@ -66,11 +63,9 @@ function CourseForm({ onSubmit, onChange, course, authors, errors, loading, erro
         type="checkbox"
         checked={course.finished}
         onChange={onChange}
-        // onClick={() => course.finished = !course.finished}
         value={course.finished}
         className={`bg-gray-50 border-2 w-1/6 rounded py-2 px-4 "border-gray-200`}
       />
-
       <button className="mx-auto my-10 shadow-2xl hover:text-gray-50 flex bg-blue-200 hover:bg-blue-800 focus:shadow-outline focus:outline-none text-blue-800 text-xl font-extrabold py-3 px-6 rounded-xl" type="submit">Save Course</button>
     </form>
   )

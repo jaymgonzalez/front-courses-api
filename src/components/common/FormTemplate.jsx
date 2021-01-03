@@ -62,12 +62,14 @@ const FormTemplate = ({ slug }) => {
   }
 
   const onChange = ({ target }) => {
-    console.log(target);
     setCourse({
       ...course,
       id: course.id || courses.length + 1,
       slug: createSlug(course.title),
       [target.name]: target.value,
+    })
+    target.name === 'finished' && setCourse({
+      ...course,
       finished: !course.finished
     })
   }
@@ -104,18 +106,3 @@ const FormTemplate = ({ slug }) => {
 }
 
 export default FormTemplate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

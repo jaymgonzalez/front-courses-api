@@ -12,7 +12,6 @@ const CoursePage = () => {
   const { slug } = useParams()
   const { courseAuthorData: course, loading, error } = useCourseAuthorData()
 
-
   if (error) throw error
 
   if (loading) return <Spinner />
@@ -20,10 +19,8 @@ const CoursePage = () => {
   let _course = course.filter(course => course.slug === slug)
   _course = _course[0]
 
-  console.log(_course.finished)
-
   return (
-    <article className="border sm:w-2/3 mx-auto border-gray-400 rounded-lg md:p-4 bg-white sm:py-3 px-2 mt-10">
+    <article className="max-w-screen-sm border w-11/12 sm:w-2/3 mx-auto border-gray-400 rounded-lg md:p-4 bg-white sm:py-3 px-2 mt-10">
       <div>
         <div className="m-2">
           <div className="flex items-center">
@@ -62,10 +59,10 @@ const CoursePage = () => {
         </div>
         <div className="mx-auto py-8 px-10 sm:p-16 justify-between flex flex-wrap max-w-screen-sm overflow-hidden">
           <Link className="pt-2" to={`/update-course/${slug}`}>
-            <button className="font-extrabold uppercase py-4 px-8 bg-blue-500 rounded-3xl text-blue-200">Update</button>
+            <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-blue-500 rounded-3xl text-blue-200">Update</button>
           </Link>
           <Link className="pt-2" to="/" onClick={() => deleteCourse('courses/', _course._id)}>
-            <button className="font-extrabold uppercase py-4 px-8 bg-red-500 rounded-3xl text-red-200">Delete</button>
+            <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-red-500 rounded-3xl text-red-200">Delete</button>
           </Link>
         </div>
       </div>

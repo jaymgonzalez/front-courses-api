@@ -25,7 +25,6 @@ const updateCourse = async (url = 'courses/', id, data) => {
       },
       body: JSON.stringify(data)
     })
-    console.log(response.json)
     return response.json()
   } catch (err) {
     console.log(err)
@@ -40,7 +39,6 @@ const deleteCourse = async (url = 'courses/', id) => {
         'Content-Type': 'application/json'
       }
     })
-    console.log(response.json)
     return response.json()
   } catch (err) {
     console.log(err)
