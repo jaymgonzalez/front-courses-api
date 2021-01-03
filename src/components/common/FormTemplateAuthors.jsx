@@ -42,7 +42,7 @@ const FormTemplate = ({ mongoId }) => {
     event.preventDefault()
     updateAuthor('authors/', author._id, author)
       .then(() => {
-        window.location.href = '/'
+        window.location.href = '/authors'
       })
       .catch((err) => {
         console.log({ err });
