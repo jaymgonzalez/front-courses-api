@@ -39,7 +39,7 @@ const FormTemplate = ({ slug }) => {
         window.location.reload()
       })
       .catch((err) => {
-        console.log({ err });
+        console.log({ err })
       })
   }
 
@@ -47,7 +47,6 @@ const FormTemplate = ({ slug }) => {
     event.preventDefault()
     updateCourse('courses/', course._id, course)
       .then(() => {
-
         window.location.href = '/'
       })
       .catch((err) => {
@@ -62,11 +61,10 @@ const FormTemplate = ({ slug }) => {
       .toLowerCase()
   }
 
-
   const onChange = ({ target }) => {
     setCourse({
       ...course,
-      id: courses.length + 1,
+      id: course.id || courses.length + 1,
       slug: createSlug(course.title),
       [target.name]: target.value
     })
@@ -81,12 +79,22 @@ const FormTemplate = ({ slug }) => {
     _course && _course[0]._id !== course._id && setCourse(_course[0])
     return (
       <div>
+        <section className="w-full pt-10">
+          <p className="text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
+            Use this form to update the course
+          </p>
+        </section>
         <CourseForm authors={authors} courses={courses} onSubmit={onSubmitPut} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
       </div>
     )
   } else {
     return (
       <div>
+        <section className="w-full pt-10">
+          <p className="text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
+            Use this form to update the course
+          </p>
+        </section>
         <CourseForm authors={authors} courses={courses} onSubmit={onSubmitPost} onChange={onChange} course={course} errors={errors} loading={loading} error={error} />
       </div>
     )

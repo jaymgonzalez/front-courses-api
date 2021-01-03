@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { deleteCourse } from '../api/course-api'
 import { useCourseAuthorData } from '../hooks/useCourseAuthorData'
 import Spinner from './common/Spinner'
 
@@ -53,6 +54,9 @@ const CoursePage = () => {
         </div>
         <Link to={`/update-course/${slug}`}>
           <button className="p-4 bg-blue-500 rounded-3xl">Update</button>
+        </Link>
+        <Link to="/" onClick={() => deleteCourse('courses/', _course._id)}>
+          <button className="p-4 bg-red-500 rounded-3xl">Delete</button>
         </Link>
       </div>
     </article>

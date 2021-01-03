@@ -32,7 +32,23 @@ const updateCourse = async (url = 'courses/', id, data) => {
   }
 }
 
+const deleteCourse = async (url = 'courses/', id) => {
+  try {
+    const response = await fetch(baseUrl + url + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(response.json)
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export {
   postCourse,
-  updateCourse
+  updateCourse,
+  deleteCourse
 }
