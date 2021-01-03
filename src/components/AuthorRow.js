@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom'
 import { SiPluralsight, SiLinkedin, SiUdemy } from 'react-icons/si'
 import { IconContext } from 'react-icons/lib'
 
-
-const CourseRow = ({ title, finished, slug, author, platform }) => {
-
+const AuthorRow = ({ name, platform, mongoId }) => {
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap">
@@ -22,34 +20,20 @@ const CourseRow = ({ title, finished, slug, author, platform }) => {
               </IconContext.Provider>
             </div>
           </div>
-          <div className="ml-4">
-            <div className="text-sm font-medium text-gray-900">
-              {author}
+          <Link to={`/author/${mongoId}`}>
+            <div className="ml-4">
+              <div className="text-sm font-medium text-gray-900">
+                {name}
+              </div>
+              <div className="text-sm text-gray-500 capitalize">
+                {platform}
+              </div>
             </div>
-            <div className="text-sm text-gray-500 capitalize">
-              {platform}
-            </div>
-          </div>
+          </Link>
         </div>
-      </td>
-      <td className="px-6 py-4">
-        <Link to={`/course/${slug}`}>
-          <div className="text-sm text-gray-900">{title}</div>
-        </Link>
-      </td>
-      <td className="px-6 py-4 whitespace-nowrap">
-        {finished ? (
-          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-            Finished
-          </span>
-        ) : (
-            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-              In Progress
-            </span>
-          )}
       </td>
     </tr>
   )
 }
 
-export default CourseRow
+export default AuthorRow

@@ -1,11 +1,11 @@
 import React from 'react'
-import CourseRow from './CourseRow'
+import { useFetch } from '../hooks/useFetch'
 import Spinner from './common/Spinner'
-import { useCourseAuthorData } from '../hooks/useCourseAuthorData'
+import AuthorRow from './AuthorRow'
 
-const CourseComponent = () => {
+const AuthorsPage = () => {
 
-  const { courseAuthorData, loading, error } = useCourseAuthorData()
+  const { data: authors, loading, error } = useFetch('authors')
 
   if (error) throw error
 
@@ -23,25 +23,15 @@ const CourseComponent = () => {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Name
                     </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Title
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-
-                  {courseAuthorData.map(course =>
-                    <CourseRow
-                      key={course.id}
-                      title={course.title}
-                      slug={course.slug}
-                      category={course.category}
-                      author={course.authorName}
-                      platform={course.platform}
-                      finished={course.finished}
+                  {authors.map(author =>
+                    <AuthorRow
+                      key={author.id}
+                      name={author.name}
+                      platform={author.platform}
+                      mongoId={author._id}
                     />
                   )}
                 </tbody>
@@ -50,8 +40,9 @@ const CourseComponent = () => {
           </div>
         </div>
       </div>
+
     </div>
   )
 }
 
-export default CourseComponent
+export default AuthorsPage

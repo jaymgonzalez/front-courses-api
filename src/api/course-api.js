@@ -13,7 +13,6 @@ const postCourse = async (url = 'courses', data) => {
   } catch (err) {
     console.log(err)
   }
-
 }
 
 const updateCourse = async (url = 'courses/', id, data) => {
@@ -45,8 +44,55 @@ const deleteCourse = async (url = 'courses/', id) => {
   }
 }
 
+const postAuthor = async (url = 'authors', data) => {
+  try {
+    const response = await fetch(baseUrl + url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const updateAuthor = async (url = 'authors/', id, data) => {
+  try {
+    const response = await fetch(baseUrl + url + id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const deleteAuthor = async (url = 'authors/', id) => {
+  try {
+    const response = await fetch(baseUrl + url + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    return response.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export {
   postCourse,
   updateCourse,
-  deleteCourse
+  deleteCourse,
+  postAuthor,
+  updateAuthor,
+  deleteAuthor
 }
