@@ -10,7 +10,7 @@ function CourseForm({ onSubmit, onChange, course, authors, errors, loading, erro
 
   if (loading) return <Spinner />
 
-  console.log(course)
+  console.log(course.finished)
 
   return (
     <form className="w-full max-w-sm mx-auto py-20 px-2" onSubmit={onSubmit}>
@@ -64,7 +64,9 @@ function CourseForm({ onSubmit, onChange, course, authors, errors, loading, erro
         id="finished"
         name="finished"
         type="checkbox"
-        onClick={() => course.finished = !course.finished}
+        checked={course.finished}
+        onChange={onChange}
+        // onClick={() => course.finished = !course.finished}
         value={course.finished}
         className={`bg-gray-50 border-2 w-1/6 rounded py-2 px-4 "border-gray-200`}
       />

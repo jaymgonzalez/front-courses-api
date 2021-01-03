@@ -17,9 +17,9 @@ const CourseRow = ({ title, finished, slug, author, platform }) => {
                 className: "rounded-lg",
                 size: 38
               }}>
-                {platform && platform.indexOf('pluralsight') !== -1 && <SiPluralsight className=" bg-gradient-to-b from-red-300 to-pink-700 text-gray-50" />}
-                {platform && platform.indexOf('linkedin') !== -1 && <SiLinkedin className="text-blue-700" />}
-                {platform && platform.indexOf('udemy') !== -1 && <SiUdemy className="text-red-600" />}
+                {platform?.indexOf('pluralsight') !== -1 && <SiPluralsight className=" bg-gradient-to-b from-red-300 to-pink-700 text-gray-50" />}
+                {platform?.indexOf('linkedin') !== -1 && <SiLinkedin className="text-blue-700" />}
+                {platform?.indexOf('udemy') !== -1 && <SiUdemy className="text-red-600" />}
               </IconContext.Provider>
             </div>
           </div>
