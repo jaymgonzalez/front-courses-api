@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { postCourse, updateCourse } from '../../api/course-api'
 import CourseForm from './CourseForm'
 import { useCourseAuthorData } from '../../hooks/useCourseAuthorData'
@@ -6,7 +7,7 @@ import { useCourseAuthorData } from '../../hooks/useCourseAuthorData'
 const FormTemplate = ({ slug }) => {
 
   const { courseAuthorData: courses, authors, loading, error } = useCourseAuthorData()
-
+  const history = useHistory()
   const [errors, setErrors] = useState({})
   const [course, setCourse] = useState({
     id: null,
@@ -36,7 +37,7 @@ const FormTemplate = ({ slug }) => {
     if (!formIsValid()) return
     postCourse('courses', course)
       .then(() => {
-        window.location.reload()
+        history.push('/')
       })
       .catch((err) => {
         console.log({ err })
@@ -47,7 +48,7 @@ const FormTemplate = ({ slug }) => {
     event.preventDefault()
     updateCourse('courses/', course._id, course)
       .then(() => {
-        window.location.href = '/'
+        history.goBack()
       })
       .catch((err) => {
         console.log({ err });

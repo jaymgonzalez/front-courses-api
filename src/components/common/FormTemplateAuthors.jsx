@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { postAuthor, updateAuthor } from '../../api/course-api'
 import AuthorForm from './AuthorForm'
 import { useFetch } from '../../hooks/useFetch'
+import { useHistory } from 'react-router-dom'
 
 const FormTemplate = ({ mongoId }) => {
 
   const { data: authors, loading, error } = useFetch('authors')
-
+  const history = useHistory()
   const [errors, setErrors] = useState({})
   const [author, setAuthor] = useState({
     id: null,
@@ -31,7 +32,7 @@ const FormTemplate = ({ mongoId }) => {
     if (!formIsValid()) return
     postAuthor('authors', author)
       .then(() => {
-        window.location.reload()
+        history.push('/')
       })
       .catch((err) => {
         console.log({ err })
@@ -42,7 +43,7 @@ const FormTemplate = ({ mongoId }) => {
     event.preventDefault()
     updateAuthor('authors/', author._id, author)
       .then(() => {
-        window.location.href = '/authors'
+        history.push('/')
       })
       .catch((err) => {
         console.log({ err });
