@@ -5,7 +5,7 @@ import { useUser } from '../user/userContext'
 
 const HomePage = () => {
 
-  const { user } = useUser()
+  const { user, setUser } = useUser()
 
   console.log(user)
 
@@ -23,7 +23,10 @@ const HomePage = () => {
           </button>
               </Link>
               :
-              <Link to="/login">
+              <Link to="/" onClick={() => {
+                sessionStorage.removeItem('jwt')
+                setUser({ loggedIn: false })
+              }}>
                 <button className="capitalize font-bold text-xl transform hover:text-white hover:scale-110 bg-pink-500 text-pink-100 py-3 px-6 rounded-3xl shadow-2xl">
                   sign out
           </button>
