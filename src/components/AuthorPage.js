@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { deleteAuthor, deleteCourse } from '../api/course-api'
+import { deleteAuthor } from '../api/course-api'
 import { useFetch } from '../hooks/useFetch'
 import Spinner from './common/Spinner'
 import { SiPluralsight, SiLinkedin, SiUdemy } from 'react-icons/si'

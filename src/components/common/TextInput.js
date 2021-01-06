@@ -12,6 +12,7 @@ function TextInput(props) {
       <input
         id={props.id}
         name={props.name}
+        type={props.type}
         onChange={props.onChange}
         value={props.value}
         className={wrapperClass}

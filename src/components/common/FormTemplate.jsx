@@ -84,7 +84,7 @@ const FormTemplate = ({ slug }) => {
     return (
       <div>
         <section className="w-full pt-10">
-          <p className="text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
+          <p className="mx-auto text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
             Use this form to update the course
           </p>
         </section>
@@ -95,7 +95,7 @@ const FormTemplate = ({ slug }) => {
     return (
       <div>
         <section className="w-full pt-10">
-          <p className="text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
+          <p className="mx-auto text-center font-extrabold sm:text-lg max-w-screen-md text-gray-800">
             Use this form to update the course
           </p>
         </section>
