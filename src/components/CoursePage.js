@@ -5,12 +5,14 @@ import { useCourseAuthorData } from '../hooks/useCourseAuthorData'
 import Spinner from './common/Spinner'
 import { SiPluralsight, SiLinkedin, SiUdemy } from 'react-icons/si'
 import { IconContext } from 'react-icons/lib'
-
+import { useUser } from "../user/userContext"
 
 const CoursePage = () => {
 
+  // const { user } = useUserContext()
   const { slug } = useParams()
   const { courseAuthorData: course, loading, error } = useCourseAuthorData()
+  const { user } = useUser()
 
   if (error) throw error
 
@@ -57,14 +59,16 @@ const CoursePage = () => {
             {_course.description}
           </div>
         </div>
-        <div className="mx-auto py-8 px-10 sm:p-16 justify-between flex flex-wrap max-w-screen-sm overflow-hidden">
-          <Link className="pt-2" to={`/update-course/${slug}`}>
-            <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-blue-500 rounded-3xl text-blue-200">Update</button>
-          </Link>
-          <Link className="pt-2" to="/" onClick={() => deleteCourse('courses/', _course._id)}>
-            <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-red-500 rounded-3xl text-red-200">Delete</button>
-          </Link>
-        </div>
+        {user.loggedIn &&
+          <div className="mx-auto py-8 px-10 sm:p-16 justify-between flex flex-wrap max-w-screen-sm overflow-hidden">
+            <Link className="pt-2" to={`/update-course/${slug}`}>
+              <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-blue-500 rounded-3xl text-blue-200">Update</button>
+            </Link>
+            <Link className="pt-2" to="/" onClick={() => deleteCourse('courses/', _course._id)}>
+              <button className="shadow-2xl hover:scale-110 transform font-extrabold uppercase py-4 px-8 bg-red-500 rounded-3xl text-red-200">Delete</button>
+            </Link>
+          </div>
+        }
       </div>
     </article>
   )

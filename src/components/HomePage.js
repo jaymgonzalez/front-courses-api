@@ -1,17 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import CourseComponent from './CourseComponent'
+import { useUser } from '../user/userContext'
 
 const HomePage = () => {
+
+  const { user } = useUser()
+
+  console.log(user)
+
+
   return (
     <>
       <div className="h-screen">
         <nav className="w-full flex justify-end p-10">
-          <Link to="/login">
-            <button className="capitalize font-bold text-xl transform hover:text-white hover:scale-110 bg-pink-500 text-pink-100 py-3 px-6 rounded-3xl shadow-2xl">
-              sign in
+          {
+            !user.loggedIn
+              ?
+              <Link to="/login">
+                <button className="capitalize font-bold text-xl transform hover:text-white hover:scale-110 bg-pink-500 text-pink-100 py-3 px-6 rounded-3xl shadow-2xl">
+                  sign in
           </button>
-          </Link>
+              </Link>
+              :
+              <Link to="/login">
+                <button className="capitalize font-bold text-xl transform hover:text-white hover:scale-110 bg-pink-500 text-pink-100 py-3 px-6 rounded-3xl shadow-2xl">
+                  sign out
+          </button>
+              </Link>
+          }
         </nav>
         <div className="h-20 sm:h-1/4 flex items-center justify-items-center">
           <div className="relative w-full">

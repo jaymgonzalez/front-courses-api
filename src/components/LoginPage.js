@@ -3,9 +3,12 @@ import { signin } from '../api/auth-api'
 import auth from '../api/auth-helper'
 import { Redirect } from 'react-router-dom'
 import TextInput from './common/TextInput'
+import { useUser } from '../user/userContext'
 
 
 const LoginPage = (props) => {
+
+  const { setUser } = useUser()
 
   const [values, setValues] = useState({
     email: '',
@@ -16,20 +19,20 @@ const LoginPage = (props) => {
 
   const clickSubmit = (e) => {
     e.preventDefault()
-    const user = {
+    const _user = {
       email: values.email || undefined,
       password: values.password || undefined
     }
 
-    console.log(user)
-
-    signin(user).then((data) => {
-      console.log(values);
+    signin(_user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error })
       } else {
         auth.authenticate(data, () => {
-          setValues({ ...values, error: '', redirectToReferrer: true })
+          setValues({ ...values, loggedIn: true, error: '', redirectToReferrer: true })
+          setUser({
+            loggedIn: true
+          })
         })
       }
     })

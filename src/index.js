@@ -4,12 +4,14 @@ import './index.css'
 import App from './App'
 import ErrorBoundary from './ErrorBoundary'
 import { BrowserRouter as Router } from 'react-router-dom'
-
+import { UserProvider } from './user/userContext'
 
 ReactDOM.render(
   <ErrorBoundary>
     <Router>
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </Router>
   </ErrorBoundary>,
   document.getElementById('root')
