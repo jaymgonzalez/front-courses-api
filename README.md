@@ -1,6 +1,6 @@
 # Front end for the Courses App
 
-
+This is an app to show case all the courses that I have done in the past few months
 
 # Getting Started with Create React App
 
